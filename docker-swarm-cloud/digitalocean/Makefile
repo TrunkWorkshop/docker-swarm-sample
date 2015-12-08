@@ -1,12 +1,11 @@
 clean-machine:
-	docker-machine rm -f digitalocean-master
-	docker-machine rm -f digitalocean-node
-	docker-machine rm -f digitalocean-keystore
+	- docker-machine rm -f digitalocean-master
+	- docker-machine rm -f digitalocean-node
+	- docker-machine rm -f digitalocean-keystore
 
 create-machine-keystore:
 	docker-machine create \
     --driver digitalocean \
-    --digitalocean-access-token 894aeed929598737811996e694496fab2f0ba8665dbd0e7aea25721619bc5767 \
 		--digitalocean-image ubuntu-15-10-x64 \
     digitalocean-keystore
 
@@ -19,7 +18,6 @@ run-consul:
 create-machine-swarm-master:
 	docker-machine create \
 		--driver digitalocean \
-		--digitalocean-access-token 894aeed929598737811996e694496fab2f0ba8665dbd0e7aea25721619bc5767 \
 		--digitalocean-image ubuntu-15-10-x64 \
 		--swarm --swarm-image="swarm" --swarm-master \
 		--swarm-discovery="consul://$(DOCKER_IP_KEYSTORE):8500" \
@@ -30,7 +28,6 @@ create-machine-swarm-master:
 create-machine-swarm-node:
 	docker-machine create \
 	--driver digitalocean \
-	--digitalocean-access-token 894aeed929598737811996e694496fab2f0ba8665dbd0e7aea25721619bc5767 \
 	--digitalocean-image ubuntu-15-10-x64 \
 	--swarm --swarm-image="swarm" \
 	--swarm-discovery="consul://$(DOCKER_IP_KEYSTORE):8500" \

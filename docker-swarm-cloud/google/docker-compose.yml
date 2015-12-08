@@ -1,0 +1,12 @@
+compose_web:
+  container_name: 'compose_web'
+  image: bfirsh/compose-mongodb-demo
+  environment:
+      - "MONGO_HOST=compose_mongo"
+      - "constraint:node==google-master"
+  ports:
+      - "80:5000"
+
+compose_mongo:
+  container_name: 'compose_mongo'
+  image: mongo
